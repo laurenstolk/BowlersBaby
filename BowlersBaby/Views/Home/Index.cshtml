@@ -9,4 +9,46 @@
     <p>Learn about bowlers in your area!</p>
 </div>
 
+<ul>
+    @foreach (var b in Model)
+    {
+        <li>@b.BowlerID - @b.BowlerLastName, @b.BowlerFirstName</li>
+    }
+</ul>
 
+<table class="table table-sm table-striped table-bordered">
+
+    <thead class="bold">
+        <tr>
+            <th class="text-center">First Name</th>
+            <th class="text-center">Middle Initial</th>
+            <th class="text-center">Last Name</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">City</th>
+            <th class="text-center">State</th>
+            <th class="text-center">Zip</th>
+            <th class="text-center">Phone Number</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var b in Model)
+        {
+        <tr>
+            <td class="text-center">@b.BowlerFirstName</td>
+            <td class="text-center">@b.BowlerMiddleInit</td>
+            <td class="text-center">@b.BowlerLastName</td>
+            <td class="text-center">@b.BowlerAddress</td>
+            <td class="text-center">@b.BowlerCity</td>
+            <td class="text-center">@b.BowlerState</td>
+            <td class="text-center">@b.BowlerZip</td>
+            <td class="text-center">@b.BowlerPhoneNumber</td>
+            <td class="text-center"><a asp-controller="Home" class="btn btn-info btn-sm d-flex justify-content-center" asp-action="Edit" asp-route-bowlerid="@b.BowlerID">🔨 Edit</a></td>
+            <td class="text-center"><a asp-controller="Home" class="btn btn-info btn-sm d-flex justify-content-center" asp-action="Delete" asp-route-bowlerid="@b.BowlerID">🗑️ Delete</a></td>
+        </tr>
+        }
+    </tbody>
+
+</table>
