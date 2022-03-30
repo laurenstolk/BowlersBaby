@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BowlersBaby.Models;
 
 namespace BowlersBaby.Models.ViewModels
 {

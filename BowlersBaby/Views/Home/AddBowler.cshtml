@@ -17,37 +17,49 @@
 
         <div class="form-group">
             <label asp-for="BowlerMiddleInit">Middle Initial:</label>
-            <input asp-for="BowlerMiddleInit" />
+            <input asp-for="BowlerMiddleInit" class="form-control" />
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerLastName">Last Name:</label>
-            <input asp-for="BowlerLastName" />
+            <input asp-for="BowlerLastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TeamID">Team:</label>
+            <select asp-for="TeamID">
+                <option value="">Select a team</option>
+                @foreach (Team t in ViewBag.Teams)
+                {
+                    <option value="@t.TeamID">@t.TeamName</option>
+                }
+            </select>
+            @*<input asp-for="Team.TeamName" class="form-control" />*@
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerAddress">Street Address:</label>
-            <input asp-for="BowlerAddress" />
+            <input asp-for="BowlerAddress" class="form-control" />
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerCity">City:</label>
-            <input asp-for="BowlerCity" />
+            <input asp-for="BowlerCity" class="form-control" />
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerState">State:</label>
-            <input asp-for="BowlerState" />
+            <input asp-for="BowlerState" class="form-control" />
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerZip">Zipcode:</label>
-            <input asp-for="BowlerZip" />
+            <input asp-for="BowlerZip" class="form-control" />
         </div>
 
         <div class="form-group">
             <label asp-for="BowlerPhoneNumber">Phone Number:</label>
-            <input asp-for="BowlerPhoneNumber" />
+            <input asp-for="BowlerPhoneNumber" class="form-control" />
         </div>
 
         <div class="float-end">

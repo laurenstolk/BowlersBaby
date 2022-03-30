@@ -9,12 +9,7 @@
     <p>Learn about bowlers in your area!</p>
 </div>
 
-<ul>
-    @foreach (var b in Model)
-    {
-        <li>@b.BowlerID - @b.BowlerLastName, @b.BowlerFirstName</li>
-    }
-</ul>
+<h1>@ViewBag.teamname</h1>
 
 <table class="table table-sm table-striped table-bordered">
 
@@ -23,6 +18,7 @@
             <th class="text-center">First Name</th>
             <th class="text-center">Middle Initial</th>
             <th class="text-center">Last Name</th>
+            <th class="text-center">Team</th>
             <th class="text-center">Address</th>
             <th class="text-center">City</th>
             <th class="text-center">State</th>
@@ -40,6 +36,7 @@
             <td class="text-center">@b.BowlerFirstName</td>
             <td class="text-center">@b.BowlerMiddleInit</td>
             <td class="text-center">@b.BowlerLastName</td>
+            <td class="text-center">@b.Team.TeamName</td>
             <td class="text-center">@b.BowlerAddress</td>
             <td class="text-center">@b.BowlerCity</td>
             <td class="text-center">@b.BowlerState</td>

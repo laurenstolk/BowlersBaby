@@ -21,13 +21,22 @@ namespace BowlersBaby.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int team)
+        public IActionResult Index(string teamname)
         {
-            var x = new BowlersViewModel
-            {
-                Bowlers = repo.Bowlers
-                    .Where(x => x.TeamID == team)
-            }
+            //var x = new BowlersViewModel
+            //{
+            //    Bowlers = repo.Bowlers
+            //        .Where(x => x.TeamID == team)
+            //};
+
+            //ViewBag.Teams = context.Teams.ToList();
+
+            ViewBag.teamname = teamname;
+
+            var x = repo.Bowlers
+                .Where(x => x.Team.TeamName == teamname || teamname == null)
+                .Include(x => x.Team)
+                .ToList();
 
             return View(x);
         }
@@ -35,9 +44,15 @@ namespace BowlersBaby.Controllers
         [HttpGet]
         public IActionResult AddBowler()
         {
-            ViewBag.Teams = context.Teams.ToList();
+            //ViewBag.Teams = repo.Teams
+            //    .Include(x => x.TeamName);
 
-            return View();
+            Bowler bowler = new Bowler();
+
+            ViewBag.Teams = repo.Teams.ToList();
+            ViewBag.Bowler = repo.Bowlers.ToList();
+
+            return View(bowler);
         }
 
         [HttpPost]
@@ -45,13 +60,18 @@ namespace BowlersBaby.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Add(b);
-                context.SaveChanges();
-                return View("Confirmation", b);
+                b.BowlerID = (repo.Bowlers.Max(b => b.BowlerID)) + 1;
+                repo.AddBowler(b);
+                return RedirectToAction("Index");
+
+                //context.Add(b);
+                //context.SaveChanges();
+                //return View("Confirmation", b);
             }
             else
             {
-                ViewBag.Teams = context.Teams.ToList();
+                ViewBag.Teams = repo.Teams.ToList();
+                ViewBag.Bowler = repo.Bowlers.ToList();
                 return View(b);
             }
         }
@@ -59,7 +79,7 @@ namespace BowlersBaby.Controllers
         [HttpGet]
         public IActionResult Edit(int bowlerid)
         {
-            ViewBag.Teams = context.Teams.ToList();
+            ViewBag.Teams = repo.Teams.ToList();
 
             var bowler = repo.Bowlers.Single(x => x.BowlerID == bowlerid);
 

@@ -5,24 +5,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BowlersBaby.Components
 {
-    public class CategoryViewComponent : ViewComponent
+    public class TeamViewComponent : ViewComponent
     {
         private IBowlersRespository repo { get; set; }
 
-        public CategoryViewComponent(IBowlersRespository temp)
+        public TeamViewComponent(IBowlersRespository temp)
         {
             repo = temp;
         }
 
-        //Components to get all the categories and send them to the view
+        //Components to get all the teams and send them to the view
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedTeam = RouteData?.Values["team"];
+            ViewBag.SelectedTeam = RouteData?.Values["teamname"];
 
-            var teams = repo.Bowlers
-                .Select(x => x.Team)
+            var teams = repo.Teams
+                .Select(x => x.TeamName)
                 .Distinct()
-                .OrderBy(x => x);
+                .OrderBy(x => x)
+                .ToList();
 
             return View(teams);
         }
